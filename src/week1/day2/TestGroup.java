@@ -1,5 +1,7 @@
 package week1.day2;
 
+import java.util.Scanner;
+
 /**
  * Created by amakogon on 26.02.15.
  */
@@ -13,6 +15,16 @@ public class TestGroup {
     System.out.println(g1.length);
 
     Student student = new Student("Anton", "AA11");
+
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter student name");
+    String studentName = sc.next();
+    System.out.println("Enter group name");
+    String groupName = sc.next();
+
+    Student student1 = new Student(studentName, groupName);
+
+
 //before add method
     Student[] temp = group.getStudents();
 //    temp[0] = student;
@@ -21,6 +33,7 @@ public class TestGroup {
 //after addStudent method
 
     group.addStudent(student);
+    group.addStudent(student1);
     group.showStudents();
 
   }
