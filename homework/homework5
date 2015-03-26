@@ -1,0 +1,12 @@
+1) Доделать MyList (на основе массива)
+2) Доделать MyLinkedStack (на основе класса Node)
+3) Дописать Сервисный центр:
+  - при старте программы выгружаем сервисныйЦентр из фала
+  - при выходе из программы записываем в файл обьект сервисныйЦентр
+
+
+Теория:
+-Collection, List
+-Serializable, InputStream, OutputStream
+-Exceptions (checked & unchecked), try-catch-finally
+-Inner & Nested classes

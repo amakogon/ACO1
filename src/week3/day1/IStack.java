@@ -9,4 +9,8 @@ public interface IStack {
 
   boolean push(Object o);
 
+  boolean remove(Object o);
+
+  boolean contains(Object o);
+
 }

@@ -19,10 +19,13 @@ public class TestSort {
     System.out.println(Arrays.toString(apples));
     Arrays.sort(apples, new AppleComparator());
     System.out.println(Arrays.toString(apples));
+
+
+    Arrays.sort(apples, new AppleComparator());
   }
 
 
-  public class MyComparator implements Comparator<Apple> {
+  public static class MyComparator implements Comparator<Apple> {
 
     @Override
     public int compare(Apple o1, Apple o2) {

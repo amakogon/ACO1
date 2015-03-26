@@ -12,11 +12,12 @@ public class TestStack {
     Integer i1 = new Integer(5);
 
 
-    stack.push(new Integer(1));
-    stack.push(new Integer(2));
-    stack.push(new Integer(3));
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-    System.out.println(stack.pop());
+
+    stack.remove(2);
     System.out.println(stack.pop());
     System.out.println(stack.pop());
     System.out.println(stack.pop());

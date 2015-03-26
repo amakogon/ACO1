@@ -1,5 +1,7 @@
 package week1.day1;
 
+import java.util.ArrayList;
+
 public class Ex1 {
   public static void main(String[] args) {
     int[] mas1 = {1, 2, 3, 4, 5};
