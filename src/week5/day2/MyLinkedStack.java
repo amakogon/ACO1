@@ -3,6 +3,7 @@ package week5.day2;
 import week3.day1.IStack;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
 public class MyLinkedStack implements IStack{
 
@@ -36,6 +37,11 @@ public class MyLinkedStack implements IStack{
   @Override
   public boolean contains(Object o) {
     return false;
+  }
+
+  @Override
+  public Iterator iterator() {
+    return null;
   }
 
   private static class Node {

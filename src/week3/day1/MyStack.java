@@ -1,13 +1,15 @@
 package week3.day1;
 
+import java.util.Iterator;
+
 /**
  * Created by amakogon on 12.03.15.
  */
-public class MyStack implements IStack {
+public class MyStack<T> implements IStack<T> {
 
   private static final int DEFAULT_SIZE = 16;
 
-  private Object[] elements;
+  private T[] elements;
   private int index;
 
   public MyStack() {
@@ -16,22 +18,22 @@ public class MyStack implements IStack {
   }
 
   public MyStack(int size) {
-    elements = new Object[size];
+    elements = (T[]) new Object[size];
   }
 
   @Override
-  public Object pop() {
+  public T pop() {
     if (index == 0) {
       return null;
     }
 
-    Object top = elements[--index];
+    T top = elements[--index];
     //elements[index] = null;
     return top;
   }
 
   @Override
-  public boolean push(Object o) {
+  public boolean push(T o) {
     if (index >= elements.length) {
       return false;
     }
@@ -41,7 +43,7 @@ public class MyStack implements IStack {
   }
 
   @Override
-  public boolean remove(Object o) {
+  public boolean remove(T o) {
     for (int i = 0; i < index; i++) {
       if (elements[i].equals(o)) {
         System.arraycopy(elements, i + 1, elements, i, index - i);
@@ -53,12 +55,38 @@ public class MyStack implements IStack {
   }
 
   @Override
-  public boolean contains(Object o) {
+  public boolean contains(T o) {
     for (int i = 0; i < index; i++) {
       if (elements[i].equals(o)) {
         return true;
       }
     }
     return false;
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    return new MyItarator<T>();
+  }
+
+  private class MyItarator<E> implements Iterator<E> {
+    int iteratorIndex = index - 1;
+    @Override
+    public boolean hasNext() {
+      if(iteratorIndex < 0){
+        return false;
+      }
+      return elements[iteratorIndex] != null;
+    }
+
+    @Override
+    public E next() {
+      return (E) elements[iteratorIndex--];
+    }
+
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
   }
 }

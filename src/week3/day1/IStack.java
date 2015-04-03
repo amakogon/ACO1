@@ -3,14 +3,14 @@ package week3.day1;
 /**
  * Created by amakogon on 12.03.15.
  */
-public interface IStack {
+public interface IStack<T> extends Iterable<T> {
 
-  Object pop();
+  T pop();
 
-  boolean push(Object o);
+  boolean push(T o);
 
-  boolean remove(Object o);
+  boolean remove(T o);
 
-  boolean contains(Object o);
+  boolean contains(T o);
 
 }
