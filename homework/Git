@@ -1,0 +1,11 @@
+1. Региструемся на https://github.com/
+2. качаем Git http://git-scm.com/downloads
+3. https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+
+
+Если успешно пройти 3-й этап, то ваш проект будет залит на гит.
+Если нужно добавить или обновить существующий код:
+1. через командную строку переходим в папку с проектом
+2. git add .
+3. git commit -m "Any message"
+3. git push origin master (и вводим логин и пароль)
