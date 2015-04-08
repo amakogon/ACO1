@@ -5,13 +5,13 @@ import week3.day1.IStack;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
-public class MyLinkedStack implements IStack{
+public class MyLinkedStack<T> implements IStack<T>{
 
   private Node top;
   private int size;
 
   @Override
-  public boolean push(Object o) {
+  public boolean push(T o) {
     Node node = new Node(o, top);
     top = node;
     size++;
@@ -19,11 +19,11 @@ public class MyLinkedStack implements IStack{
   }
 
   @Override
-  public Object pop() {
+  public T pop() {
     if(top == null) {
       throw new EmptyStackException();
     }
-    Object value = top.value;
+    T value = (T) top.value;
     top = top.next;
     size--;
     return value;
@@ -44,11 +44,11 @@ public class MyLinkedStack implements IStack{
     return null;
   }
 
-  private static class Node {
-    Object value;
+  private static class Node<T> {
+    T value;
     Node next;
 
-    private Node(Object value, Node next) {
+    private Node(T value, Node next) {
       this.value = value;
       this.next = next;
 

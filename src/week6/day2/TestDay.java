@@ -26,5 +26,8 @@ public class TestDay {
 
     System.out.println(Day.FRIDAY.compareTo(Day.MONDAY) > 0);
 
+//    System.out.println(Day.valueOf("asdsadsa"));
+    System.out.println(Day.values()[0]);
+
   }
 }
