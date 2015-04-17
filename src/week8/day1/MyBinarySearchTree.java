@@ -15,7 +15,7 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements IBTree<E> {
     for (Node<E> start = root; start != null; ) {
       if (start.element.compareTo(element) > 0) {
         if (start.leftChild == null) {
-          start.leftChild = new Node<E>(element, start, null, null);
+          start.leftChild = createNode(element, start, null, null);
           size++;
           break;
         } else {
@@ -23,7 +23,7 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements IBTree<E> {
         }
       } else {
         if (start.rightChild == null) {
-          start.rightChild = new Node<E>(element, start, null, null);
+          start.rightChild = createNode(element, start, null, null);
           size++;
           break;
         } else {
@@ -36,8 +36,69 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements IBTree<E> {
 
   @Override
   public boolean remove(E element) {
-    Node target = findNode(element);
-    return false;
+    Node<E> target = findNode(element);
+    if (target == root) {
+      root = null;
+      size--;
+      return true;
+    }
+
+    if (target == null) {
+      return false;
+    }
+
+    Node targetRightChild = target.rightChild;
+    Node targetLeftChild = target.leftChild;
+
+    if (targetLeftChild == null && targetRightChild == null) {
+      if (target.parent.leftChild == target) {
+        target.parent.leftChild = null;
+      } else {
+        target.parent.rightChild = null;
+      }
+    } else if (targetRightChild == null) {
+      if (defineChild(target) == 1) {
+        target.parent.leftChild = targetLeftChild;
+      } else {
+        target.parent.rightChild = targetLeftChild;
+      }
+    } else if (targetLeftChild == null) {
+      if (defineChild(target) == 1) {
+        target.parent.leftChild = targetRightChild;
+      } else {
+        target.parent.rightChild = targetRightChild;
+      }
+    } else {
+      Node<E> max = findMax(targetLeftChild);
+
+      if (max.leftChild != null) {
+        max.parent.rightChild = max.leftChild;
+        max.leftChild.parent = max.parent;
+      }
+
+      target.element = max.element;
+      if (defineChild(max) == 1) {
+        max.parent.leftChild = null;
+      } else {
+        max.parent.rightChild = null;
+      }
+    }
+    size--;
+    return true;
+  }
+
+  /**
+   * @return 1 if child is left, -1 right, 0 if something going wrong
+   */
+  private int defineChild(Node child) {
+    return child.parent.leftChild == child ? 1 : child.parent.rightChild == child ? -1 : 0;
+  }
+
+  private Node<E> findMax(Node<E> iter) {
+    while (iter.rightChild != null) {
+      iter = iter.rightChild;
+    }
+    return iter;
   }
 
   @Override
@@ -68,8 +129,12 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements IBTree<E> {
     return foundNode;
   }
 
+  private Node<E> createNode(E element, Node<E> parent, Node<E> leftChild, Node<E> rightChild) {
+    return new Node<E>(element, parent, leftChild, rightChild);
+  }
 
-  private static class Node<E> {
+
+  private class Node<E> {
     E element;
     Node<E> parent;
     Node<E> leftChild;
@@ -80,10 +145,6 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements IBTree<E> {
       this.parent = parent;
       this.leftChild = leftChild;
       this.rightChild = rightChild;
-    }
-
-    Node<E> createNode(E element, Node<E> parent, Node<E> leftChild, Node<E> rightChild) {
-      return new Node<E>(element, parent, leftChild, rightChild);
     }
   }
 }
